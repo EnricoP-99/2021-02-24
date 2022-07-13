@@ -47,12 +47,19 @@ public class FXMLController {
 
     @FXML
     void doCreaGrafo(ActionEvent event) {
+    	txtResult.clear();
+    	this.model.creaGrafo(cmbMatch.getValue());
+    	txtResult.appendText("Grafo creato con successo\n");
+    	txtResult.appendText("#Vertici: "+ this.model.getNVertici()+"\n");
+    	txtResult.appendText("#Archi: "+ this.model.getNArchi()+"\n");
+    	
     	
     }
 
     @FXML
     void doGiocatoreMigliore(ActionEvent event) {    	
-    	
+    	txtResult.clear();
+    	txtResult.appendText(this.model.getMigliore().toString());
     }
     
     @FXML
@@ -73,5 +80,10 @@ public class FXMLController {
     
     public void setModel(Model model) {
     	this.model = model;
+    	
+    	for(Match m :this.model.listAllMatches())
+    	{
+    		cmbMatch.getItems().add(m);
+    	}
     }
 }
